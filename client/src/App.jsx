@@ -1,5 +1,5 @@
 import React from 'react' 
-import { Routes, Route, Outlet } from 'react-router-dom'
+import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Loading from './components/Loading'
 import BuilderPage from './pages/BuilderPage'
@@ -34,8 +34,12 @@ const App = () => {
           <Route path="/preview/:id" element={<PreviewPage />} />
         </Route>
 
+        {/* catch all */}
+
+
       </Routes>
-    
+      <Route path="*" element={<Navigate to="/" replace />} />
+
     </div>
   )
 }
