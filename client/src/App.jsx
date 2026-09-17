@@ -36,9 +36,9 @@ const App = () => {
 
         {/* catch all */}
 
+        <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>
-      <Route path="*" element={<Navigate to="/" replace />} />
 
     </div>
   )
