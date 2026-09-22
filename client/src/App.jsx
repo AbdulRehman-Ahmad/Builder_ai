@@ -7,6 +7,7 @@ import BuilderPage from "./pages/BuilderPage";
 import AuthPage from "./pages/AuthPage";
 import PreviewPage from "./pages/PreviewPage";
 import { AuthLayout, GuestLayout } from "./pages/Layout";
+import PublishPage from "./pages/PublishPage";
 
 const Layout = () => {
   return (
@@ -35,6 +36,9 @@ const App = () => {
           <Route path="/builder/:id" element={<BuilderPage />} />
           <Route path="/preview/:id" element={<PreviewPage />} />
         </Route>
+
+        {/* Publish Routes */}
+        <Route path="/publish/:id" element={<PublishPage/>}/>
 
         {/* catch all */}
         <Route path="*" element={<Navigate to="/" replace />} />
