@@ -1,9 +1,8 @@
-import { createContext, useState, useContext, useEffect, useCallback } from "react";
+import { createContext, useState, useContext, useEffect, useCallback, useMemo } from "react";
 import api from "../api/api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import debounce from "lodash.debounce";
-import React from 'react'
 
 const AppContext = createContext(undefined);
 
@@ -96,7 +95,10 @@ export function AppContextProvider({ children }) {
 
     // Projects Actions
     const loadProjects = useCallback(async () => {
-        if (!user) return;
+    if (!user) {
+        setLoadingProjects(false);
+        return;
+    }
 
         try {
             const { data } = await api.get("/api/projects");
@@ -231,7 +233,7 @@ export function AppContextProvider({ children }) {
         [activeProject, user]
     );
 
-    const debouncedSave = React.useMemo(
+    const debouncedSave = useMemo(
         () =>
             debounce(async (files, id) => {
             try {
@@ -245,7 +247,7 @@ export function AppContextProvider({ children }) {
         );
         useEffect(() => {
             return () => {
-                debouncedSave.cancel();
+                debouncedSave.flush();
             };
             }, [debouncedSave]);
 
@@ -282,8 +284,8 @@ export function AppContextProvider({ children }) {
                 loadProject,
                 handleGenerate,
                 handleDelete,
-                logout,
-                updateProjectFiles
+                updateProjectFiles,
+                handleChat
             }}
         >
             {children}
