@@ -15,7 +15,7 @@ const allowedOrigins = (process.env.ORIGINS || "")
   .filter(Boolean);
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: "https://builderai-production-796f.up.railway.app",
   credentials: true
 }));
 
