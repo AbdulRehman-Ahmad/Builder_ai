@@ -9,9 +9,13 @@ import projectRouter from "./routes/projectRoutes.js";
 const app = express();
 
 await connectToDatabase();
+const allowedOrigins = (process.env.ORIGINS || "")
+  .split(",")
+  .map(o => o.trim())
+  .filter(Boolean);
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: allowedOrigins,
   credentials: true
 }));
 
